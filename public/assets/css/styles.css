@@ -1,0 +1,99 @@
+.bagde {
+    background-color: rgb(229, 229, 229);
+    padding: 2px 5px 2px 5px;
+    border-radius: 5px;
+}
+
+.bagde-danger {
+    background-color: red;
+    color: white;
+}
+
+.bagde-success {
+    background-color: green;
+    color: white;
+}
+
+.bagde-warning {
+    background-color: yellow;
+    color: black;
+}
+
+@media (min-width:1200px) {
+    .mx-md-5 {
+        margin-right: 12%!important;
+        margin-left: 12%!important;
+    } 
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    height: 60vh; /* 70% of the viewport height */
+}
+
+#chart-content {
+    height: 10vh; /* 10% of the viewport height */
+    width: 100%;
+    line-height: 4px;
+}
+
+#chart-description {
+    height: 50vh; /* Adjust the height as needed */
+    width: 100%;
+    
+}
+
+#heading{
+    padding: 2px;;
+}
+
+#heading .text-center{
+    font-weight: 500;
+    font-family: "Roboto Mono", sans-serif;
+    font-style: normal;
+    font-size: 16px;
+}
+ 
+
+#item-select {
+    height: 10vh; /* Adjust the height as needed */
+    width: 100%;
+}
+
+#item-select label{
+    font-weight: light;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 15px;
+    padding: auto;
+    margin: auto;
+
+}
+ @media only screen and (min-width: 768px) {
+    .chart-container {
+        height: 300px; /* Shorter on small devices */
+    }
+    
+}
+
+
+.job-card {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: aqua;
+    border: 1px solid #ccc;
+}
+
+.text {
+    margin: 5px 0;
+}
+
+.read-more, .read-less {
+    color: blue;
+    cursor: pointer;
+}
+
+
+
