@@ -78,6 +78,7 @@ return array(
     'App\\Admin\\Forms\\Steps\\Info' => $baseDir . '/app/Admin/Forms/Steps/Info.php',
     'App\\Admin\\Forms\\Steps\\Password' => $baseDir . '/app/Admin/Forms/Steps/Password.php',
     'App\\Admin\\Forms\\Steps\\Profile' => $baseDir . '/app/Admin/Forms/Steps/Profile.php',
+    'App\\Console\\Commands\\UpdateOrganisationIds' => $baseDir . '/app/Console/Commands/UpdateOrganisationIds.php',
     'App\\Console\\Commands\\UpdatePersonDistricts' => $baseDir . '/app/Console/Commands/UpdatePersonDistricts.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',

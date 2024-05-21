@@ -380,8 +380,8 @@ class ComposerStaticInitda89eef54c810448a827ed04bb3da82f
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -733,6 +733,7 @@ class ComposerStaticInitda89eef54c810448a827ed04bb3da82f
         'App\\Admin\\Forms\\Steps\\Info' => __DIR__ . '/../..' . '/app/Admin/Forms/Steps/Info.php',
         'App\\Admin\\Forms\\Steps\\Password' => __DIR__ . '/../..' . '/app/Admin/Forms/Steps/Password.php',
         'App\\Admin\\Forms\\Steps\\Profile' => __DIR__ . '/../..' . '/app/Admin/Forms/Steps/Profile.php',
+        'App\\Console\\Commands\\UpdateOrganisationIds' => __DIR__ . '/../..' . '/app/Console/Commands/UpdateOrganisationIds.php',
         'App\\Console\\Commands\\UpdatePersonDistricts' => __DIR__ . '/../..' . '/app/Console/Commands/UpdatePersonDistricts.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',

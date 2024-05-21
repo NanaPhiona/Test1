@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'dd0d47e99615cae6933a87414a0d09344e6bb6dc',
+        'reference' => 'deb51478ddf0910ddd6953ca8838c18656a760f5',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -230,9 +230,9 @@
             'dev_requirement' => false,
         ),
         'giggsey/libphonenumber-for-php' => array(
-            'pretty_version' => '8.13.36',
-            'version' => '8.13.36.0',
-            'reference' => '9ca4179e4332d21578cb29f0c0406f0a2b8803e3',
+            'pretty_version' => '8.13.37',
+            'version' => '8.13.37.0',
+            'reference' => '536c747ff1af433dddc615b26b9674047e013076',
             'type' => 'library',
             'install_path' => __DIR__ . '/../giggsey/libphonenumber-for-php',
             'aliases' => array(),
@@ -241,7 +241,7 @@
         'giggsey/libphonenumber-for-php-lite' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '8.13.36',
+                0 => '8.13.37',
             ),
         ),
         'giggsey/locale' => array(
@@ -529,7 +529,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'dd0d47e99615cae6933a87414a0d09344e6bb6dc',
+            'reference' => 'deb51478ddf0910ddd6953ca8838c18656a760f5',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -680,9 +680,9 @@
             'dev_requirement' => true,
         ),
         'mockery/mockery' => array(
-            'pretty_version' => '1.6.11',
-            'version' => '1.6.11.0',
-            'reference' => '81a161d0b135df89951abd52296adf97deb0723d',
+            'pretty_version' => '1.6.12',
+            'version' => '1.6.12.0',
+            'reference' => '1f4efdd7d3beafe9807b08156dfcb176d18f1699',
             'type' => 'library',
             'install_path' => __DIR__ . '/../mockery/mockery',
             'aliases' => array(),
@@ -944,9 +944,9 @@
             ),
         ),
         'psr/http-factory' => array(
-            'pretty_version' => '1.0.2',
-            'version' => '1.0.2.0',
-            'reference' => 'e616d01114759c4c489f93b099585439f795fe35',
+            'pretty_version' => '1.1.0',
+            'version' => '1.1.0.0',
+            'reference' => '2b4765fddfe3b508ac62f829e852b1501d3f6e8a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/http-factory',
             'aliases' => array(),
