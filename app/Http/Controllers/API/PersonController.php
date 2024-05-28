@@ -16,13 +16,6 @@ class PersonController extends Controller
     public function index()
     {
         try {
-            // Initializing an empty collection
-            // $people = collect();
-
-            // // Retrieve data in chunks
-            // ModelsPerson::chunk(100, function ($chunk) use ($people) {
-            //     $people = $people->merge($chunk);
-            // });
 
             $people = ModelsPerson::get();
             return Api_Utils::success($people, "People successfully returned", 200);
