@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Encore\Admin\Facades\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Client\Request;
 use SplFileObject;
 
 class Utils extends Model
@@ -926,4 +927,12 @@ DELETE FROM people WHERE id > 8954
         }
         return;
     }
+
+    // public static function get_user(Request $r)
+    // {
+    //     $user = Admin::user();
+    //     $organisation_id = Organisation::find($user->organisation_id);
+    //     $organ_id = $r->header($organisation_id);
+    //     return $organ_id;
+    // }
 }

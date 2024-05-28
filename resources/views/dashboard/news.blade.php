@@ -55,8 +55,6 @@ use App\Models\Utils;
                     <div class="row">
                         <div
                             style="
-                                
-                        
                                     background-image: url(storage/{{ $i->photo }});
                                     background-position: center;
                                     background-size: cover;
@@ -72,7 +70,6 @@ use App\Models\Utils;
                             </span>
                         </p>
                     </div>
-
 
                 </a>
             </div>

@@ -5,8 +5,10 @@ namespace App\Admin\Controllers;
 use App\Models\Product;
 use App\Models\ServiceProvider;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
+use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 use \Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\Calculation\Web\Service;
@@ -53,7 +55,7 @@ class ProductController extends AdminController
         })->sortable();
         $grid->column('details', __('Details'))->display(function ($details) {
             return Str::words($details, 100, '...');
-        });
+        })->setAttributes(['style' => 'font-size: 14px;']);;
 
         $grid->column('price', __('Price'));
         $grid->column('offer_type', __('Offer type'))->display(function ($offerType) {
@@ -91,8 +93,10 @@ class ProductController extends AdminController
         $show->field('service_provider_id', __('Service provider id'));
         $show->field('name', __('Name'));
         $show->field('type', __('Type'));
-        $show->field('photo', __('Photo'));
-        $show->field('details', __('Details'));
+        $show->field('photo', __('Photo'))->image('', 50, 50);
+        $show->field('details', __('Details'))->as(function ($details) {
+            return strip_tags($details);
+        });
         $show->field('price', __('Price'));
         $show->field('offer_type', __('Offer type'));
         $show->field('created_at', __('Created at'));
@@ -130,6 +134,13 @@ class ProductController extends AdminController
         $form->quill('details', __('Details'));
 
         $form->saving(function (Form $form) {
+            $admin = auth('admin')->user();
+            //quill editor, eliminate html tags and keep only text
+            $form->details = strip_tags($form->details);
+            // $form->service_provider_id = auth('admin')->user()->service_provider->id;
+        });
+
+        $form->saved(function (Form $form) {
             $admin = auth('admin')->user();
             //quill editor, eliminate html tags and keep only text
             $form->details = strip_tags($form->details);

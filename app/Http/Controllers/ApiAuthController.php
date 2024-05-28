@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Organisation;
 use App\Models\User;
 use App\Models\Utils;
 use App\Traits\ApiResponser;
 use Carbon\Carbon;
 use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -66,8 +68,6 @@ class ApiAuthController extends Controller
             ->orWhere('email', $r->username)
             ->first();
 
-
-
         if ($u == null) {
 
             $phone_number = Utils::prepare_phone_number($r->username);
@@ -101,64 +101,168 @@ class ApiAuthController extends Controller
 
         $u->token = $token;
         $u->remember_token = $token;
-
         return $this->success($u, 'Logged in successfully.');
     }
 
+
     public function register(Request $r)
     {
-        if ($r->phone_number == null) {
-            return $this->error('Phone number is required.');
+        try {
+            // Validate required fields
+            if ($r->phone_number == null) {
+                return $this->error('Phone number is required.');
+            }
+
+            $phone_number = Utils::prepare_phone_number(trim($r->phone_number));
+
+            if (!Utils::phone_number_is_valid($phone_number)) {
+                return $this->error('Invalid phone number. ' . $phone_number);
+            }
+
+            if ($r->first_name == null) {
+                return $this->error('First name is required.');
+            }
+
+            if ($r->last_name == null) {
+                return $this->error('Last name is required.');
+            }
+
+            if ($r->password == null) {
+                return $this->error('Password is required.');
+            }
+
+            // Check for existing user
+            $existing_user = Administrator::where('phone_number', $phone_number)
+                ->orWhere('username', $phone_number)
+                ->first();
+
+            if ($existing_user != null) {
+                return $this->error('User with the same phone number already exists.');
+            }
+
+            // Create new user
+            $user = new Administrator();
+            $user->phone_number = $phone_number;
+            $user->username = $phone_number;
+            $user->first_name = $r->first_name;
+            $user->last_name = $r->last_name;
+            $user->organisation_id = 0; // Default value, adjust as necessary
+            $user->name = $r->first_name . " " . $r->last_name;
+            $user->password = password_hash(trim($r->password), PASSWORD_DEFAULT);
+
+            if (!$user->save()) {
+                return $this->error('Failed to create account. Please try again.');
+            }
+
+            // Fetch newly created user
+            $new_user = Administrator::find($user->id);
+            if ($new_user == null) {
+                return $this->error('Account created successfully but failed to log you in.');
+            }
+
+            // Set JWT configuration and generate token
+            try {
+                Config::set('jwt.ttl', 60 * 24 * 30 * 365);
+
+                $token = auth('api')->attempt([
+                    'username' => $phone_number,
+                    'password' => trim($r->password),
+                ]);
+
+                if (!$token) {
+                    return $this->error('Failed to authenticate the new user.', 401);
+                }
+            } catch (\Exception $e) {
+                return $this->error($e->getMessage(), 400);
+            }
+
+            // Assign token to user
+            // $new_user->token = $token;
+            $new_user->remember_token = $token;
+            $new_user->save(); // Save the user with the new token
+
+            return $this->success($new_user, 'Account created successfully.');
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage(), 400);
         }
-
-        $phone_number = Utils::prepare_phone_number(trim($r->phone_number));
-
-
-        if (!Utils::phone_number_is_valid($phone_number)) {
-            return $this->error('Invalid phone number. ' . $phone_number);
-        }
-
-        if ($r->first_name == null) {
-            return $this->error('First name is required.');
-        }
-
-        if ($r->last_name == null) {
-            return $this->error('Last name is required.');
-        }
-
-        if ($r->password == null) {
-            return $this->error('Password is required.');
-        }
-
-        $u = Administrator::where('phone_number', $phone_number)
-            ->orWhere('username', $phone_number)->first();
-        if ($u != null) {
-            return $this->error('User with same phone number already exists.');
-        }
-        $user = new Administrator();
-        $user->phone_number = $phone_number;
-        $user->username = $phone_number;
-        $user->first_name = $r->first_name;
-        $user->last_name = $r->last_name;
-        $user->name = $r->first_name . " " . $user->last_name;
-        $user->password = password_hash(trim($r->password), PASSWORD_DEFAULT);
-        if (!$user->save()) {
-            return $this->error('Failed to create account. Please try again.');
-        }
-
-        $new_user = Administrator::find($user->id);
-        if ($new_user == null) {
-            return $this->error('Account created successfully but failed to log you in.');
-        }
-        Config::set('jwt.ttl', 60 * 24 * 30 * 365);
-
-        $token = auth('api')->attempt([
-            'username' => $phone_number,
-            'password' => trim($r->password),
-        ]);
-
-        $new_user->token = $token;
-        $u->remember_token = $token;
-        return $this->success($new_user, 'Account created successfully.');
     }
+
+
+
+    //Registration area
+    // public function register(Request $r)
+    // {
+    //     try {
+    //         if ($r->phone_number == null) {
+    //             return $this->error('Phone number is required.');
+    //         }
+
+    //         $phone_number = Utils::prepare_phone_number(trim($r->phone_number));
+
+
+    //         if (!Utils::phone_number_is_valid($phone_number)) {
+    //             return $this->error('Invalid phone number. ' . $phone_number);
+    //         }
+
+
+    //         if ($r->first_name == null) {
+    //             return $this->error('First name is required.');
+    //         }
+
+    //         if ($r->last_name == null) {
+    //             return $this->error('Last name is required.');
+    //         }
+
+    //         if ($r->password == null) {
+    //             return $this->error('Password is required.');
+    //         }
+
+    //         try {
+    //             $u = Administrator::where('phone_number', $phone_number)
+    //                 ->orWhere('username', $phone_number)->first();
+    //             if ($u != null) {
+    //                 return $this->error('User with same phone number already exists.');
+    //             }
+    //             $user = new Administrator();
+    //             $user->phone_number = $phone_number;
+    //             $user->username = $phone_number;
+    //             $user->first_name = $r->first_name;
+    //             $user->last_name = $r->last_name;
+    //             $user->organisation_id = 0;
+    //             $user->name = $r->first_name . " " . $user->last_name;
+    //             $user->password = password_hash(trim($r->password), PASSWORD_DEFAULT);
+    //             if (!$user->save()) {
+    //                 return $this->error('Failed to create account. Please try again.');
+    //             }
+    //         } catch (\Exception $e) {
+    //             return $this->error($e->getMessage(), 400);
+    //         }
+
+
+
+    //         $new_user = Administrator::find($user->id);
+    //         if ($new_user == null) {
+    //             return $this->error('Account created successfully but failed to log you in.');
+    //         }
+
+
+    //         try {
+    //             Config::set('jwt.ttl', 60 * 24 * 30 * 365);
+
+    //             $token = auth('api')->attempt([
+    //                 'username' => $phone_number,
+    //                 'password' => trim($r->password),
+    //             ]);
+    //         } catch (\Exception $e) {
+    //             return $this->error($e->getMessage(), 400);
+    //         }
+
+    //         $new_user->token = $token;
+    //         $u->remember_token = $token;
+
+    //         return $this->success($new_user, 'Account created successfully.');
+    //     } catch (\Exception $e) {
+    //         return $this->error($e->getMessage(), 400);
+    //     }
+    // }
 }

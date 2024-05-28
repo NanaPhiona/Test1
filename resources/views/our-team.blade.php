@@ -9,7 +9,6 @@
             <div class="d-lg-none" style="height: 960px;"></div>
             <div class="d-none d-lg-block" style="height: 768px;"></div>
         </div>
-
         <!-- Content -->
         <div class="container position-relative zindex-5 pt-5">
             <div class="row">
