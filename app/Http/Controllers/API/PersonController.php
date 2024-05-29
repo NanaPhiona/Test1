@@ -13,14 +13,12 @@ use Maatwebsite\Excel\Imports\ModelManager;
 class PersonController extends Controller
 {
     //function for returning all people
-    public function index()
+    //function for returning all people
+    public function index(Request $request)
     {
         try {
+            $people = ModelsPerson::paginate($request->per_page);
 
-            $people = ModelsPerson::get();
-            return Api_Utils::success($people, "People successfully returned", 200);
-
-            // Check if the collection is populated correctly
             if ($people->isEmpty()) {
                 throw new \Exception("No data retrieved from the database.");
             }
