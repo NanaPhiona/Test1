@@ -8,6 +8,7 @@ use App\Http\Controllers\API\NewsPostApiController;
 use App\Http\Controllers\API\OPD;
 use App\Http\Controllers\API\PersonController;
 use App\Http\Controllers\API\ProductServiceAPIController;
+use App\Http\Controllers\API\PWDCountController;
 use App\Http\Controllers\API\ServiceProviderAPIController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ApiResurceController;
@@ -27,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::POST("users/register", [ApiAuthController::class, "register"]);
 Route::POST("users/login", [ApiAuthController::class, "login"]);
+Route::GET("pwdCount", [PWDCountController::class, "countPWD"]);
 Route::resource('people', PersonController::class);
 Route::resource('district-unions', District_UnionAPIController::class);
 Route::resource('opds', OPD::class);
