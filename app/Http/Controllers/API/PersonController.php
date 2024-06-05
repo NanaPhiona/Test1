@@ -33,20 +33,10 @@ class PersonController extends Controller
     //function for creating a new person
     public function store(PeopleStoreRequest $request)
     {
-        //Creating person and storing them to the database
-        $user = auth()->user();  // Get the authenticated user
-        if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-        // Assuming 'organisation_id' and 'relationship_type' are necessary
-        $organisation = Organisation::find($user->organisation_id);
-        if (!$organisation || !in_array($organisation->relationship_type, ['opd', 'du'])) {
-            return response()->json(['message' => 'Invalid or no organisation linked'], 400);
-        }
-
 
         try {
-            $person = ModelsPerson::create($request->all());
+            $requestData = $request->all();
+            $person = ModelsPerson::create($requestData);
             $person->disabilities()->attach($request->input('disabilities'));
             return Api_Utils::success($person, "Person created", 200);
         } catch (\Exception $e) {

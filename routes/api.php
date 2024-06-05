@@ -29,7 +29,6 @@ use Illuminate\Support\Facades\Route;
 Route::POST("users/register", [ApiAuthController::class, "register"]);
 Route::POST("users/login", [ApiAuthController::class, "login"]);
 Route::GET("pwdCount", [PWDCountController::class, "countPWD"]);
-Route::resource('people', PersonController::class);
 Route::resource('district-unions', District_UnionAPIController::class);
 Route::resource('opds', OPD::class);
 Route::resource('service-providers', ServiceProviderAPIController::class);
@@ -54,8 +53,9 @@ Route::resource('products', ProductServiceAPIController::class);
 // Route::get('news-posts', [ApiResurceController::class, 'news_posts']);
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::resource('people', PersonController::class);
 });
 
 Route::get('ajax', function (Request $r) {

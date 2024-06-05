@@ -45,6 +45,7 @@
 
     <!-- Main Theme Styles + Bootstrap -->
     <link rel="stylesheet" media="screen" href="{{ url('') }}/assets/css/theme.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
     <!-- Page loading styles -->
     <style>

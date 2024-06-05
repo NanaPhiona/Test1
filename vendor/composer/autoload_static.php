@@ -743,6 +743,7 @@ class ComposerStaticInitda89eef54c810448a827ed04bb3da82f
         'App\\Http\\Controllers\\API\\JobApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/JobApiController.php',
         'App\\Http\\Controllers\\API\\NewsPostApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/NewsPostApiController.php',
         'App\\Http\\Controllers\\API\\OPD' => __DIR__ . '/../..' . '/app/Http/Controllers/API/OPD.php',
+        'App\\Http\\Controllers\\API\\PWDCountController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/PWDCountController.php',
         'App\\Http\\Controllers\\API\\PersonController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/PersonController.php',
         'App\\Http\\Controllers\\API\\ProductServiceAPIController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/ProductServiceAPIController.php',
         'App\\Http\\Controllers\\API\\ServiceProviderAPIController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/ServiceProviderAPIController.php',

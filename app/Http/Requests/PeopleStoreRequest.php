@@ -35,18 +35,20 @@ class PeopleStoreRequest extends FormRequest
             'district_of_origin' => 'required',
             'village' => 'required',
             'sub_county' => 'required',
+            'is_formal_education' => 'required',
             'education_level' => 'required|in:Formal Education,Informal Education,No Education',
-            'is_formal_education' => [
-                'required_if:education_level,Formal Education',
-                'nullable',
-                'in:Primary,Secondary -UCE,Secondary - UACE,Bachelor\'s Degree,Master\'s Degree,PHD'
-            ],
+            // 'is_formal_education' => [
+            //     'required_if:education_level,Formal Education',
+            //     'nullable',
+            //     'in:Primary,Secondary -UCE,Secondary - UACE,Bachelor\'s Degree,Master\'s Degree,PHD'
+            // ],
             'informal_education' => 'required_if:education_level,Informal Education|nullable|string',
+
         ];
     }
     public function withValidator($validator)
     {
-        $validator->sometimes('is_formal_education', 'required|string', function ($input) {
+        $validator->sometimes('is_formal_education', 'required', function ($input) {
             return $input->education_level === 'Formal Education';
         });
 

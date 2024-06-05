@@ -18,6 +18,7 @@ class Person extends Model
         'is_employed',
         'is_member',
         'is_same_address',
+
     ];
 
     protected $fillable = [
@@ -57,7 +58,7 @@ class Person extends Model
         'education_level',
         'sub_county',
         'village',
-        'employment_status'
+        'employment_status',
     ];
 
     protected $casts = [
@@ -128,7 +129,7 @@ class Person extends Model
                 $person->employment_status = 'Unemployed';
             }
 
-            $user = Admin::user();
+            $user = auth()->user();
             $organisation = Organisation::find($user->organisation_id);
             if ($organisation->relationship_type == 'opd') {
                 $person->opd_id = $organisation->id;
@@ -151,13 +152,13 @@ class Person extends Model
                 $person->employment_status = 'unemployed';
             }
 
-            $user = Admin::user();
-            $organisation = Organisation::find($user->organisation_id);
-            if (!$organisation) {
-                die('Wait for admin approval');
-            } else {
-                $person->is_approved = 1;
-            }
+            // $user = Admin::user();
+            // $organisation = Organisation::find($user->organisation_id);
+            // if (!$organisation) {
+            //     die('Wait for admin approval');
+            // } else {
+            //     $person->is_approved = 1;
+            // }
         });
 
         static::updating(function ($person) {

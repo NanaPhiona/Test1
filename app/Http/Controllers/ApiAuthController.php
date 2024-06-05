@@ -61,7 +61,7 @@ class ApiAuthController extends Controller
             return $this->error('Password is required.');
         }
 
-        $r->username = trim($r->username);
+        //  $r->username = trim($r->username);
 
         $u = User::where('phone_number', $r->username)
             ->orWhere('username', $r->username)
@@ -146,7 +146,6 @@ class ApiAuthController extends Controller
             $user->username = $phone_number;
             $user->first_name = $r->first_name;
             $user->last_name = $r->last_name;
-            $user->organisation_id = 0; // Default value, adjust as necessary
             $user->name = $r->first_name . " " . $r->last_name;
             $user->password = password_hash(trim($r->password), PASSWORD_DEFAULT);
 

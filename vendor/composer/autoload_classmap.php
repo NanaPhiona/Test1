@@ -88,6 +88,7 @@ return array(
     'App\\Http\\Controllers\\API\\JobApiController' => $baseDir . '/app/Http/Controllers/API/JobApiController.php',
     'App\\Http\\Controllers\\API\\NewsPostApiController' => $baseDir . '/app/Http/Controllers/API/NewsPostApiController.php',
     'App\\Http\\Controllers\\API\\OPD' => $baseDir . '/app/Http/Controllers/API/OPD.php',
+    'App\\Http\\Controllers\\API\\PWDCountController' => $baseDir . '/app/Http/Controllers/API/PWDCountController.php',
     'App\\Http\\Controllers\\API\\PersonController' => $baseDir . '/app/Http/Controllers/API/PersonController.php',
     'App\\Http\\Controllers\\API\\ProductServiceAPIController' => $baseDir . '/app/Http/Controllers/API/ProductServiceAPIController.php',
     'App\\Http\\Controllers\\API\\ServiceProviderAPIController' => $baseDir . '/app/Http/Controllers/API/ServiceProviderAPIController.php',
