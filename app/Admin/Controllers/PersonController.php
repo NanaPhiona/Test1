@@ -67,7 +67,7 @@ class PersonController extends AdminController
         $grid->quickSearch('name')->placeholder('Search by name');
 
         $user = Admin::user();
-        $organisation = Organisation::where('user_id', $user->id)->first();
+        $organisation = Organisation::find(Admin::user()->organisation_id);
         if ($user->inRoles(['nudipu', 'administrator'])) {
             $grid->model()->orderBy('created_at', 'desc');
         } elseif ($user->isRole('district-union')) {
@@ -428,7 +428,7 @@ class PersonController extends AdminController
 
                 if (Admin::user()->isRole('opd')) {
                     $current_user = auth("admin")->user();
-                    $organisation = Organisation::where('user_id', $current_user->id)->first();
+                    $organisation = Organisation::find($current_user->organisation_id)->first();
                     $form->select('district_id', __('Select Profiled District'))->options($organisation->districtsOfOperation->pluck('name', 'id'))->placeholder('Select Profiled District')->rules("required");
                 }
                 $form->divider();
@@ -476,7 +476,7 @@ class PersonController extends AdminController
 
                     $form->is_approved = 1; //Approve if registered by an organisation
                     $current_user = auth("admin")->user();
-                    $organisation = Organisation::where('user_id', $current_user->id)->first();
+                    $organisation = Organisation::find($current_user->organisation_id)->first();
                     error_log("Organisation: " . $organisation->name);
 
                     if ($organisation == null) {

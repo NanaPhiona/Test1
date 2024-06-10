@@ -33,7 +33,11 @@ class PersonController extends Controller
     //function for creating a new person
     public function store(PeopleStoreRequest $request)
     {
-
+        $user = auth()->user();
+        $organisation = Organisation::find($user->organisation_id);
+        if (!$organisation) {
+            return "There is no such organisation";
+        }
         try {
             $requestData = $request->all();
             $person = ModelsPerson::create($requestData);

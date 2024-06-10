@@ -549,7 +549,7 @@
                         type: 'logarithmic',
                         ticks: {
                             callback: function(value, index, values) {
-                                if (value === 5 || value === 10 || value === 50 || value === 100 || value ===
+                                if (value === 10 || value === 100 || value ===
                                     1000 || value === 10000) {
                                     return value.toString();
                                 }

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\DisabilitiesController;
 use App\Http\Controllers\API\District_UnionAPIController;
+use App\Http\Controllers\API\DistrictAPIController;
 use App\Http\Controllers\API\EventApiController;
 use App\Http\Controllers\API\InnovationApiController;
 use App\Http\Controllers\API\JobApiController;
@@ -30,6 +32,7 @@ Route::POST("users/register", [ApiAuthController::class, "register"]);
 Route::POST("users/login", [ApiAuthController::class, "login"]);
 Route::GET("pwdCount", [PWDCountController::class, "countPWD"]);
 Route::resource('district-unions', District_UnionAPIController::class);
+// Route::resource('people', PersonController::class);
 Route::resource('opds', OPD::class);
 Route::resource('service-providers', ServiceProviderAPIController::class);
 Route::resource('jobs', JobApiController::class);
@@ -37,6 +40,8 @@ Route::resource('innovations', InnovationApiController::class);
 Route::resource('events', EventApiController::class);
 Route::resource('news-posts', NewsPostApiController::class);
 Route::resource('products', ProductServiceAPIController::class);
+Route::resource('disabilities', DisabilitiesController::class);
+Route::resource('districts', DistrictAPIController::class);
 
 // Route::POST("people", [ApiResurceController::class, "person_create"]);
 // Route::PUT("people/{id}", [ApiResurceController::class, "person_update"]);
@@ -56,6 +61,10 @@ Route::resource('products', ProductServiceAPIController::class);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('people', PersonController::class);
+});
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
 
 Route::get('ajax', function (Request $r) {
