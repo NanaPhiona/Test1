@@ -10,7 +10,6 @@ use App\Http\Controllers\API\NewsPostApiController;
 use App\Http\Controllers\API\OPD;
 use App\Http\Controllers\API\PersonController;
 use App\Http\Controllers\API\ProductServiceAPIController;
-use App\Http\Controllers\API\PWDCountController;
 use App\Http\Controllers\API\ServiceProviderAPIController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ApiResurceController;
@@ -30,9 +29,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::POST("users/register", [ApiAuthController::class, "register"]);
 Route::POST("users/login", [ApiAuthController::class, "login"]);
-Route::GET("pwdCount", [PWDCountController::class, "countPWD"]);
+Route::resource('people', PersonController::class);
 Route::resource('district-unions', District_UnionAPIController::class);
-// Route::resource('people', PersonController::class);
 Route::resource('opds', OPD::class);
 Route::resource('service-providers', ServiceProviderAPIController::class);
 Route::resource('jobs', JobApiController::class);
@@ -40,8 +38,8 @@ Route::resource('innovations', InnovationApiController::class);
 Route::resource('events', EventApiController::class);
 Route::resource('news-posts', NewsPostApiController::class);
 Route::resource('products', ProductServiceAPIController::class);
-Route::resource('disabilities', DisabilitiesController::class);
-Route::resource('districts', DistrictAPIController::class);
+Route::apiResource('disabilities', DisabilitiesController::class);
+Route::apiResource('districts', DistrictAPIController::class);
 
 // Route::POST("people", [ApiResurceController::class, "person_create"]);
 // Route::PUT("people/{id}", [ApiResurceController::class, "person_update"]);
@@ -57,11 +55,6 @@ Route::resource('districts', DistrictAPIController::class);
 // Route::get('events', [ApiResurceController::class, 'events']);
 // Route::get('news-posts', [ApiResurceController::class, 'news_posts']);
 
-
-
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::resource('people', PersonController::class);
-});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

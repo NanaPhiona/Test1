@@ -32,6 +32,7 @@ class PeopleStoreRequest extends FormRequest
             'phone_number_2' => 'nullable|phone:UG',
             'disabilities' => 'required|array',
             'disabilities.*' => 'required|exists:disabilities,id',
+            'organisation_id' => 'required|exists:organisations,id',
             'district_of_origin' => 'required',
             'village' => 'required',
             'sub_county' => 'required',

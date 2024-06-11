@@ -129,14 +129,14 @@ class Person extends Model
                 $person->employment_status = 'Unemployed';
             }
 
-            $user = auth()->user();
-            $organisation = Organisation::find($user->organisation_id);
-            if ($organisation->relationship_type == 'opd') {
-                $person->opd_id = $organisation->id;
-            }
-            if ($organisation->relationship_type == 'du') {
-                $person->district_id = $organisation->district_id;
-            }
+            // $user = auth()->user();
+            // $organisation = Organisation::find($user->organisation_id);
+            // if ($organisation->relationship_type == 'opd') {
+            //     $person->opd_id = $organisation->id;
+            // }
+            // if ($organisation->relationship_type == 'du') {
+            //     $person->district_id = $organisation->district_id;
+            // }
 
             $person->district_of_residence = $person->district_id;
         });
@@ -152,13 +152,13 @@ class Person extends Model
                 $person->employment_status = 'unemployed';
             }
 
-            $user = auth()->user();
-            $organisation = Organisation::find($user->organisation_id);
-            if (!$organisation) {
-                die('Wait for admin approval');
-            } else {
-                $person->is_approved = 1;
-            }
+            // $user = auth()->user();
+            // $organisation = Organisation::find($user->organisation_id);
+            // if (!$organisation) {
+            //     die('Wait for admin approval');
+            // } else {
+            //     $person->is_approved = 1;
+            // }
         });
 
         static::updating(function ($person) {
